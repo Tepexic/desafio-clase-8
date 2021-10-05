@@ -22,11 +22,11 @@ productosRouter.get("/:id", async (req, res) => {
     const producto = await Productos.getById(id);
     if (producto) return res.json(producto);
     // error si no se encontró
-    res.status(400);
+    res.status(404);
     return res.json(errorMsg);
   }
   // error si no es un id valido
-  res.status(400);
+  res.status(404);
   return res.json(errorMsg);
 });
 
@@ -50,7 +50,7 @@ productosRouter.put("/:id", async (req, res) => {
       data: { ...req.body },
     });
   } else {
-    res.status(400);
+    res.status(404);
     res.send(errorMsg);
   }
 });
@@ -67,7 +67,7 @@ productosRouter.delete("/:id", async (req, res) => {
     return res.json(errorMsg);
   }
   // error si no es un id valido
-  res.status(400);
+  res.status(404);
   return res.json(errorMsg);
 });
 
