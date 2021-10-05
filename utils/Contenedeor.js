@@ -65,12 +65,16 @@ class Contenedor {
    */
   async updateById(id, newData) {
     await this.readFile();
-    if (this.fileContent[id]) {
-      this.fileContent[id] = { ...newData, id };
-      // Guardar archivo con el nuevo elemento
-      await this.writeFile();
+    const index = this.fileContent.findIndex((e) => {
+      return e.id === id;
+    });
+    if (index > -1) {
+      // reemplazar elemento con los nuevos datos
+      this.fileContent.splice(index, 1, { ...newData, id });
+      this.writeFile();
       return true;
     } else {
+      console.log("No se encontró el elemento en la base de datos");
       return false;
     }
   }
